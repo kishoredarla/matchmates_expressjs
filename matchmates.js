@@ -3,7 +3,6 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import autenticationRoute from './routes/authenticationRoutes.js';
-import bloodBankRoutes from './routes/bloodBankRoutes.js';
 import { db } from './config/dbConfig.js';
 
 dotenv.config();
