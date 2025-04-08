@@ -1,5 +1,8 @@
 import express from "express";
-import { LoginAppCtrl, createUserCtrl } from '../controllers/authenticationController.js'
+import { LoginAppCtrl, createUserCtrl,handleGetUser,
+  handleUpdateUser,
+  handleDeleteUser,
+  handleChangePassword } from '../controllers/authenticationController.js'
 import Jwt from 'jsonwebtoken';
 
 function verifyToken(req, res, next) {
@@ -33,5 +36,9 @@ const route = express.Router();
 
 route.post("/login", LoginAppCtrl);
 route.post("/create", createUserCtrl);
+route.get('/user/:id', handleGetUser);
+route.put('/user/:id', handleUpdateUser);
+route.delete('/user/:id', handleDeleteUser);
+route.put('/user/:id/change-password', handleChangePassword);
 
 export default route;

@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import autenticationRoute from './routes/authenticationRoutes.js';
 import { db } from './config/dbConfig.js';
+import userHobbiesRoutes from './routes/userHobbiesRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -25,10 +26,11 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use('/matchmates/hobbies', userHobbiesRoutes);
 
 app.use('/matchmates/autenticate', autenticationRoute);
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 7002;
 app.listen(PORT, () => {
     console.log(`Server connected to port ${PORT}`);
 });

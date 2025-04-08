@@ -73,3 +73,28 @@ export const createUserMdl = function (userData, callback) {
     });
   });
 };
+
+export const getUserById = (userId, callback) => {
+  const sql = 'SELECT user_id, user_name, first_name, last_name, email, mobile_no, address FROM user WHERE user_id = ?';
+  db.query(sql, [userId], callback);
+};
+
+export const updateUser = (userId, data, callback) => {
+  const { user_name, first_name, last_name, email, mobile_no, address, updated_by } = data;
+  const sql = `
+    UPDATE user 
+    SET user_name = ?, first_name = ?, last_name = ?, email = ?, mobile_no = ?, address = ?, updated_by = ?
+    WHERE user_id = ?
+  `;
+  db.query(sql, [user_name, first_name, last_name, email, mobile_no, address, updated_by, userId], callback);
+};
+
+export const deleteUser = (userId, callback) => {
+  const sql = 'DELETE FROM user WHERE user_id = ?';
+  db.query(sql, [userId], callback);
+};
+
+export const changePassword = (userId, newPassword, callback) => {
+  const sql = 'UPDATE user SET password = ? WHERE user_id = ?';
+  db.query(sql, [newPassword, userId], callback);
+};

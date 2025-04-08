@@ -1,4 +1,7 @@
-import { loginMdl, createUserMdl } from '../models/authenticationModel.js';
+import { loginMdl, createUserMdl,getUserById,
+  updateUser,
+  deleteUser,
+  changePassword } from '../models/authenticationModel.js';
 import express from "express";
 import Jwt from 'jsonwebtoken';
 
@@ -58,3 +61,36 @@ export const createUserCtrl = (req, res) => {
         }
     });
 };
+
+export const handleGetUser = (req, res) => {
+  getUserById(req.params.id, (err, result) => {
+    if (err) return res.status(500).json({ message: 'Failed to retrieve user' });
+    if (!result.length) return res.status(404).json({ message: 'User not found' });
+    res.status(200).json(result[0]);
+  });
+};
+
+export const handleUpdateUser = (req, res) => {
+  updateUser(req.params.id, req.body, (err) => {
+    if (err) return res.status(500).json({ message: 'Failed to update profile' });
+    res.status(200).json({ message: 'Profile updated successfully' });
+  });
+};
+
+export const handleDeleteUser = (req, res) => {
+  deleteUser(req.params.id, (err) => {
+    if (err) return res.status(500).json({ message: 'Failed to delete user' });
+    res.status(200).json({ message: 'User account deleted successfully' });
+  });
+};
+
+export const handleChangePassword = (req, res) => {
+  const { newPassword } = req.body;
+  if (!newPassword) return res.status(400).json({ message: 'New password is required' });
+
+  changePassword(req.params.id, newPassword, (err) => {
+    if (err) return res.status(500).json({ message: 'Failed to change password' });
+    res.status(200).json({ message: 'Password changed successfully' });
+  });
+};
+
