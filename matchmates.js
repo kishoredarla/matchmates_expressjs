@@ -5,6 +5,8 @@ import cors from 'cors';
 import autenticationRoute from './routes/authenticationRoutes.js';
 import { db } from './config/dbConfig.js';
 import userHobbiesRoutes from './routes/userHobbiesRoutes.js';
+import connectionRequestRoutes from './routes/connectionRequestRoutes.js';
+import myActivitiesRoutes from './routes/myActivitiesRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -29,6 +31,8 @@ app.use(function (req, res, next) {
 app.use('/matchmates/hobbies', userHobbiesRoutes);
 
 app.use('/matchmates/autenticate', autenticationRoute);
+app.use('/matchmates/connection-request', connectionRequestRoutes);
+app.use('/matchmates/myactivities', myActivitiesRoutes);
 
 const PORT = process.env.PORT || 7002;
 app.listen(PORT, () => {
