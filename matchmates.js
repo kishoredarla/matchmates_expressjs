@@ -7,6 +7,9 @@ import { db } from './config/dbConfig.js';
 import userHobbiesRoutes from './routes/userHobbiesRoutes.js';
 import connectionRequestRoutes from './routes/connectionRequestRoutes.js';
 import myActivitiesRoutes from './routes/myActivitiesRoutes.js';
+import eventsRoutes from './routes/eventsRoutes.js';
+import eventRequestsRoutes from './routes/eventRequestsRoutes.js';
+import contactRoutes from './routes/contactRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -33,6 +36,9 @@ app.use('/matchmates/hobbies', userHobbiesRoutes);
 app.use('/matchmates/autenticate', autenticationRoute);
 app.use('/matchmates/connection-request', connectionRequestRoutes);
 app.use('/matchmates/myactivities', myActivitiesRoutes);
+app.use('/matchmates/events', eventsRoutes);
+app.use('/matchmates/event-requests', eventRequestsRoutes);
+app.use('/matchmates/contact-us', contactRoutes);
 
 const PORT = process.env.PORT || 7002;
 app.listen(PORT, () => {
